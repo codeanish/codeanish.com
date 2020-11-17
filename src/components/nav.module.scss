@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    align-self: flex-start;
+    padding-left: 1em;
+}
+
+.nav-links{
+    align-self: center;    
+    display: flex;
+    a{
+        padding: 0 1em;
+    }    
+}

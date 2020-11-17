@@ -4,5 +4,19 @@ html, body{
     background-color: $background;
     margin: 0;
     padding: 0;
-    color: $text-main
+    color: $text-main;
+    font-family: 'Roboto Mono';
+}
+
+ol, ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: $link;
+}
+
+a:hover{
+    color: $link-hover
 }

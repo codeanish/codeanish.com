@@ -1,0 +1,36 @@
+@import "../styles/variables.scss";
+
+.statement{
+    padding-left: 2em;
+    align-self: center;
+    max-width: 600px;
+    flex: 1;
+}
+
+.hello{
+    color: $highlight-text;
+}
+
+.name{
+    font-size: 72px;
+    font-weight: 600;
+}
+
+.strap-line{
+    font-size: 60px;
+    color: $text-low-contrast;
+}
+
+.bio{
+    color: $text-low-contrast;
+}
+
+.negative-space{
+    padding: 2em;
+}
+
+@media screen and (max-width: 800px){
+    .statement{
+        padding: 0;
+    }
+}
