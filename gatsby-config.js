@@ -7,6 +7,12 @@
 module.exports = {
   /* Your site config here */
   plugins: [
-    'gatsby-plugin-sass'
+    'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-plugin-s3',
+      options: {
+        bucketName: 'codeanish.com'
+      }
+    }
   ],
 }
