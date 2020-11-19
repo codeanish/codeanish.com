@@ -1,3 +1,5 @@
+![Deploy main to AWS](https://github.com/codeanish/codeanish.com/workflows/Deploy%20main%20to%20AWS/badge.svg)
+
 # codeanish.com website
 This is the repository for my website codeanish.com. This site has been built using Gatsby - a framework on top of React to generate static websites.
 
