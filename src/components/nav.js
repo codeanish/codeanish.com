@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from 'gatsby'
 import styles from './nav.module.scss'
+import {FaTerminal} from 'react-icons/fa'
 
 const Nav = () => {
     return (
         <nav className={styles.container}>
             <div className={styles.logo}>
-                <Link to="/"><h1>Logo</h1></Link>
+                <Link to="/"><h1><FaTerminal/></h1></Link>
             </div>
             <ol className={styles.navLinks}>
                 <Link to="/blog"><li>Writing</li></Link>
