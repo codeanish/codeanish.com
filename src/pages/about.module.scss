@@ -1,0 +1,24 @@
+@import "../styles/variables.scss";
+
+.container{    
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    max-width: 600px;   
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.name{    
+    padding: 1em;
+    font-size: 1.5em;
+    color: $highlight-text;
+    font-weight: 600;
+}
+
+.section-title{
+    padding: 1em;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: center;
+}
