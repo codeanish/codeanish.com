@@ -1,3 +1,5 @@
+@import "../styles/variables.scss";
+
 .container{
     display: flex;
     justify-content: space-between;
@@ -9,9 +11,10 @@
 }
 
 .nav-links{
+    margin-right: 1em;
     align-self: center;    
     display: flex;
     a{
         padding: 0 1em;
-    }    
+    }
 }
