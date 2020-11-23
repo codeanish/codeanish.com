@@ -11,3 +11,9 @@
     flex: 1;
     display: flex;    
 }
+
+@supports (-webkit-touch-callout: none){
+    .container{
+        height: 100%;
+    }
+}
