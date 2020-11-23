@@ -1,0 +1,12 @@
+title: reflectwithraksha.com
+url: https://reflectwithraksha.com
+technologies:
+    - ReactJS
+    - Gatsby
+    - AWS
+    - Contentful
+description: >
+            A blog built for a Youtube Content Creator to showcase her work
+            and provide a space for her to share long form written content. 
+            Built using Gatsby throughout, data sourced from contentful and 
+            deployed on AWS delivered via CloudFront.
