@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import styles from './test.module.scss'
+import Layout from '../components/layout';
 
 const Test = () => {
 
@@ -20,9 +21,11 @@ const Test = () => {
     `)
 
     return (
-        <div className={styles.container}>
-            <Img fluid={images.fileName.childImageSharp.fluid} alt="Profile Image"/>        
-        </div>
+        <Layout>
+            <div className={styles.container}>
+                <Img fluid={images.fileName.childImageSharp.fluid} alt="Profile Image"/>        
+            </div>
+        </Layout>
     );
 }
 
