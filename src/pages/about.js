@@ -10,8 +10,8 @@ const About = () => {
     query {
         fileName: file(relativePath: {eq: "assets/AnishProfilePictureCircular.png"}){
             childImageSharp{
-                fixed(width: 250, height: 250){
-                    ...GatsbyImageSharpFixed
+                fluid(maxWidth: 250){
+                    ...GatsbyImageSharpFluid
                 }
             }
         }
@@ -22,8 +22,10 @@ const About = () => {
 
     return(
         <Layout>            
-            <div className={styles.container}>            
-                <Img fixed={images.fileName.childImageSharp.fixed} alt="Profile Image"/>
+            <div className={styles.container}>
+                <div className={styles.imageContainer}>
+                    <Img fluid={images.fileName.childImageSharp.fluid} alt="Profile Image"/>
+                </div>
                 <div className={styles.name}>Anish Patel</div>
                 <p>Hi I'm Anish. I'm a software engineer and architect based out of London, UK.</p>
                 <p>I've been building great software for my clients for over 12 years and I've had the opportunity to work at some amazing companies.</p>

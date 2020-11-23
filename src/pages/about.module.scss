@@ -2,12 +2,16 @@
 
 .container{    
     display: flex;
-    flex-direction: column;    
-    align-items: center;
+    flex-direction: column;        
     max-width: 600px;   
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 3em;
+}
+
+.image-container{
+    width: 300px;
+    align-self: center;
 }
 
 .name{    
@@ -15,6 +19,7 @@
     font-size: 1.5em;
     color: $highlight-text;
     font-weight: 600;
+    text-align: center;
 }
 
 .section-title{
