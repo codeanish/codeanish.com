@@ -1,0 +1,62 @@
+@import "../styles/variables.scss";
+
+.container{
+    background-color: $card-color;
+    border-radius: 10px;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 0.9em;   
+}
+
+.left{
+    width: 50%;
+    padding: 1em;
+}
+
+.right{
+    width: 50%;
+    padding: 1em;
+}
+
+.technologies{
+    display: flex;
+
+    li{
+        padding-right: 20px;        
+        color: $nord10;
+    }
+}
+
+.links{
+    padding: 1em 0;
+}
+
+.icon{
+    font-size: 1.5em;
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: $transition-time;
+    transition-property: transform;
+    color: $nord5;
+}
+
+.icon:hover,
+.icon:focus,
+.icon:active{
+    transform: scale(1.2);
+    color: $nord7
+}
+
+@media only screen and (max-width: 800px){
+    .left,
+    .right{
+        width: 100%;
+        padding: 0;
+    }
+}
