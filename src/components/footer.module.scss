@@ -27,10 +27,12 @@
     -moz-osx-font-smoothing: grayscale;
     transition-duration: $transition-time;
     transition-property: transform;
+    color: $nord5;
 }
 
 .icon:hover,
 .icon:focus,
 .icon:active{
     transform: scale(1.2);
+    color: $nord7
 }
