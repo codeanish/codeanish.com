@@ -1,7 +1,8 @@
-title: reflectwithraksha.com
+title: Reflect with Raksha
 url: https://reflectwithraksha.com
+image: reflectwithraksha.com.png
 technologies:
-    - ReactJS
+    - React
     - Gatsby
     - AWS
     - Contentful
