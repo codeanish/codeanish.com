@@ -7,7 +7,13 @@
 
 .logo{
     align-self: flex-start;
-    padding-left: 1em;
+    padding-left: 1em;  
+    a{
+        color: $nord5;       
+    }
+    a:hover{
+        color: lighten($nord5, 10%);
+    }  
 }
 
 .nav-links{
@@ -15,6 +21,10 @@
     align-self: center;    
     display: flex;
     a{
-        padding: 0 1em;
+        padding: 0 1em; 
+        color: $nord5;       
+    }
+    a:hover{
+        color: lighten($nord5, 10%);
     }
 }

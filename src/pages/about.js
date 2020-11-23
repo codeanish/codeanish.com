@@ -7,7 +7,7 @@ import styles from './about.module.scss'
 const About = () => {
 
     const images = useStaticQuery(graphql`
-    query MyQuery {
+    query {
         fileName: file(relativePath: {eq: "assets/AnishProfilePictureCircular.png"}){
             childImageSharp{
                 fixed(width: 250, height: 250){

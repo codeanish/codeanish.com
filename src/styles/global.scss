@@ -12,9 +12,11 @@ ol, ul{
     list-style: none;
 }
 
+$link-color: $link;
+
 a{
     text-decoration: none;
-    color: $link;
+    color: $link-color;
     font-weight: 600;
     transition-duration: $transition-time;
     transition-property: color;
@@ -23,5 +25,5 @@ a{
 a:hover,
 a:focus,
 a:active {
-    color: $link-hover;
+    color: lighten($link-color, 10%);
 }
