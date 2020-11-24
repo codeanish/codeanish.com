@@ -12,11 +12,11 @@ const ProjectCard = ({title, url, description, technologies, image}) => {
                 <p>{description}</p>
                 <ol className={styles.technologies}>
                 {technologies.map((tech) => {
-                    return <li>{tech}</li>
+                    return <li key={tech}>{tech}</li>
                 })}
                 </ol>
                 <div className={styles.links}>
-                    <a href={url} target="_blank" rel="noreferrer" className={styles.icon}><FaExternalLinkAlt/></a>
+                    <a href={url} target="_blank" rel="noreferrer" aria-label="External Link" className={styles.icon}><FaExternalLinkAlt/></a>
                 </div>                
             </div>
             <div className={styles.right}>

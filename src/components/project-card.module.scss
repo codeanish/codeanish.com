@@ -5,8 +5,7 @@
     border-radius: 10px;
     padding: 1em;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: row;    
     font-size: 0.9em;   
 }
 
@@ -54,6 +53,10 @@
 }
 
 @media only screen and (max-width: 800px){
+    .container{
+        flex-wrap: wrap;
+    }
+
     .left,
     .right{
         width: 100%;

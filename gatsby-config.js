@@ -26,5 +26,17 @@ module.exports = {
         path: `${__dirname}/src/`
       } 
     },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'CodeAnish',
+        short_name: 'CodeAnish',
+        start_url: '.',
+        // background_color: '#3B4252',
+        // theme_color: '#3B4252',
+        // display: 'standalone',
+        icon: 'src/assets/icon.png'
+      }
+    }
   ],
 }
