@@ -20,7 +20,7 @@ const ProjectCard = ({title, url, description, technologies, image}) => {
                 </div>                
             </div>
             <div className={styles.right}>
-                <Img fluid={image}/>
+                <Img fluid={image} className={styles.imageTheme}/>
             </div>            
         </div>
     )

@@ -16,8 +16,7 @@ const About = () => {
             }
         }
 
-      }
-      
+      }  
     `)
 
     return(

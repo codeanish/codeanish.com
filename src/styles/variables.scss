@@ -18,7 +18,7 @@ $nord14: #EBCB8B;
 $nord15: #A3BE8C;
 $nord16: #B48EAD;
 
-$background: $nord2;
+$background: $nord1;
 $text-main: $nord7;
 $text-low-contrast: $nord5;
 $text-super-low-contrast: $nord11;
@@ -26,4 +26,4 @@ $link: $nord15;
 $link-hover: lighten($link, 20%);
 $highlight-text: $nord15;
 $transition-time: 0.3s;
-$card-color: $nord1;
+$card-color: $nord2;
