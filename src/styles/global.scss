@@ -29,3 +29,7 @@ a:focus,
 a:active {
     color: lighten($link-color, 10%);
 }
+
+h2{
+    color: $highlight-text
+}

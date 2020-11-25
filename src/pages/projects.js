@@ -27,8 +27,8 @@ const Projects = () => {
 
     return (
         <Layout>
-          <div style={{marginBottom: "5em"}}>
-            <h1>What I've been working on...</h1>
+          <div style={{marginBottom: "5em", marginLeft:"auto", marginRight:"auto"}}>
+            <h2 style={{paddingBottom: "2em"}}>What I've been working on</h2>
             <ol>
                 {data.allProjectsYaml.nodes.map((node) => {
                     return <li key={node.title}><ProjectCard title={node.title} description={node.description} url={node.url} technologies={node.technologies} image={node.image.childImageSharp.fluid}/></li>

@@ -1,32 +1,20 @@
 @import "../styles/variables.scss";
 
 .container{
-    background-color: $card-color;    
-    padding: 1em;
     display: flex;
     flex-direction: row;    
     font-size: 0.9em;   
+    max-width: 1000px;    
 }
 
 .left{
     width: 50%;
-    padding: 1em;
+    padding-right: 1em;
 }
 
 .right{
     width: 50%;
-    padding: 1em;   
-}
-
-.image-theme{    
-    filter: grayscale(100%) contrast(1) brightness(90%);
-    mix-blend-mode: multiply;
-}
-
-.image-theme:hover,
-.image-theme:active{
-    mix-blend-mode: normal;
-    filter: none;
+    padding-left: 1em;   
 }
 
 .technologies{
