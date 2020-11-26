@@ -11,7 +11,7 @@ const Nav = () => {
                 <Link to="/">CodeAnish</Link>
             </div>
             <ol className={styles.navLinks}>
-                <Link to="/blog"><li>Writing</li></Link>
+                {/* <Link to="/blog"><li>Writing</li></Link> */}
                 <Link to="/projects"><li>Projects</li></Link>
                 <Link to="/about"><li>About</li></Link>         
             </ol>
