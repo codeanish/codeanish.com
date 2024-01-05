@@ -47,59 +47,58 @@ export default function Uses() {
     >
       <div className="space-y-20">
         <ToolsSection title="Workstation">
-          <Tool title="16” MacBook Pro, M1 Max, 64GB RAM (2021)">
-            I was using an Intel-based 16” MacBook Pro prior to this and the
-            difference is night and day. I’ve never heard the fans turn on a
-            single time, even under the incredibly heavy loads I put it through
-            with our various launch simulations.
+          <Tool title="16” MacBook Pro, M1 Pro, 16GB RAM (2021)">
+            I've been a Mac user since 2005 and this has been the best Mac I've
+            ever used in that timeframe. It felt like a huge outlay when I bought
+            it, but the utility of this laptop is unlike any other I've ever used.
+            It has a great screen, works pretty damn fast and is my go to device
+            for day-to-day coding.
           </Tool>
-          <Tool title="Apple Pro Display XDR (Standard Glass)">
-            The only display on the market if you want something HiDPI and
-            bigger than 27”. When you’re working at planetary scale, every pixel
-            you can get counts.
+          <Tool title="BENQ PD2700U Monitor x2">
+            A 27-inch, 4k monitor with great colours at a good price. I have two
+            of them on my desk. Programmer pro tip, use two monitors, don't listen
+            to the one monitor zelots, it's a productivity booster. I wish I could
+            splurge on 2x Studio Displays, but I can't justify spending so much money
+            on a monitor that tops out at 60hz. It's 2024 now, Apple, sort it out. 
           </Tool>
-          <Tool title="IBM Model M SSK Industrial Keyboard">
-            They don’t make keyboards the way they used to. I buy these any time
-            I see them go up for sale and keep them in storage in case I need
-            parts or need to retire my main.
+          <Tool title="Rama Works U80-A Seq 2">
+            I waited for 2 years to receive this keyboard and absolutely adore it.
+            That being said, don't buy anything from Rama Works now in 2024, they 
+            seem to have turned into a scam company after years of enthusiast support.
           </Tool>
-          <Tool title="Apple Magic Trackpad">
-            Something about all the gestures makes me feel like a wizard with
-            special powers. I really like feeling like a wizard with special
-            powers.
+          <Tool title="Logitech G Pro X Superlight">
+            I used to use an MX Master like everyone else, but as I got more into 
+            PC gaming, I wanted a mouse that was a lot lighter and smoother to move
+            around. This mouse fit the bill nicely.
           </Tool>
-          <Tool title="Herman Miller Aeron Chair">
+          <Tool title="Herman Miller Embody Chair">
             If I’m going to slouch in the worst ergonomic position imaginable
             all day, I might as well do it in an expensive chair.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Development tools">
-          <Tool title="Sublime Text 4">
-            I don’t care if it’s missing all of the fancy IDE features everyone
-            else relies on, Sublime Text is still the best text editor ever
-            made.
+          <Tool title="VSCode">
+            There are many camps of text editor/ide, but my daily driver is currently 
+            VSCode. It has every extension under the sun to make it behave exactly how
+            you want it to and give you every feature you need. It opens fast, works 
+            with every programming language I've tried, probably my most complete, one 
+            stop shop dev tool that I use.
           </Tool>
-          <Tool title="iTerm2">
-            I’m honestly not even sure what features I get with this that aren’t
-            just part of the macOS Terminal but it’s what I use.
+          <Tool title="Kitty">
+            I spend most of my time between a terminal and a text editor, I love Kitty
+            due to its extensibility and speed. I'm sure there are other great options,
+            but I see no current reason to change.
           </Tool>
-          <Tool title="TablePlus">
-            Great software for working with databases. Has saved me from
-            building about a thousand admin interfaces for my various projects
-            over the years.
-          </Tool>
-        </ToolsSection>
-        <ToolsSection title="Design">
-          <Tool title="Figma">
-            We started using Figma as just a design tool but now it’s become our
-            virtual whiteboard for the entire company. Never would have expected
-            the collaboration features to be the real hook.
+          <Tool title="Neovim">
+            I install Neovim on all my VMs and is my default editor on all machines I 
+            remote into for work. It has features which plain VI doesn't have, and while
+            the built in nano packages are great, having a few extra features is always
+            helpful when jumping into an ssh session.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Productivity">
-          <Tool title="Alfred">
-            It’s not the newest kid on the block but it’s still the fastest. The
-            Sublime Text of the application launcher world.
+          <Tool title="Bear">
+            A great notes app, not the most complete out there, but it is beautiful.
           </Tool>
           <Tool title="Reflect">
             Using a daily notes system instead of trying to keep things

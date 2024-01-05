@@ -11,11 +11,10 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from '@/components/SocialIcons'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
 import logorms from '@/images/logos/rms.jpeg'
+import logoCommerzbank from '@/images/logos/commerzbank.png'
+import logoGoldman from '@/images/logos/goldmansachs.png'
+import logoMa from '@/images/logos/moodysanalytics.jpeg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 
@@ -185,7 +184,7 @@ function Resume() {
     {
       company: 'Moodys Analytics',
       title: 'Principal Engineer',
-      logo: logoPlanetaria,
+      logo: logoMa,
       start: '2023',
       end: {
         label: 'Present',
@@ -195,21 +194,21 @@ function Resume() {
     {
       company: 'RMS',
       title: 'Director of Technology Consulting',
-      logo: logoAirbnb,
+      logo: logorms,
       start: '2013',
       end: '2023',
     },
     {
       company: 'Goldman Sachs',
       title: 'Senior Software Engineer',
-      logo: logoFacebook,
+      logo: logoGoldman,
       start: '2011',
       end: '2013',
     },
     {
       company: 'Commerzbank',
       title: 'Senior Software Engineer',
-      logo: logoStarbucks,
+      logo: logoCommerzbank,
       start: '2010',
       end: '2011',
     },
@@ -268,7 +267,7 @@ export default async function Home() {
               icon={GitHubIcon}
             />
             <SocialLink
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/codeanish"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
             />
