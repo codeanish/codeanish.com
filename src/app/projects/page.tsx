@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import logoPomodoro from '@/images/logos/pomodoro.png'
+import logoArithmetic from '@/images/logos/arithmetic.png'
 
 const projects = [
   {
@@ -12,6 +13,13 @@ const projects = [
       'A Pomodoro Timer CLI tool. This tool can help you stay focussed for periods of time and improve flow during tasks.',
     link: { href: 'https://github.com/codeanish/pomo-cli', label: 'github.com' },
     logo: logoPomodoro,
+  },
+  {
+    name: 'FastNumbers',
+    description:
+      'A basic arithmetic game developed to help my kids with improving their mental arithmetic. My friend Craig has the record with a score of 68 for 60 seconds of addition',
+    link: { href: 'https:/fastnumbers.codeanish.com', label: 'fastnumbers.codeanish.com' },
+    logo: logoArithmetic,
   },
 ]
 

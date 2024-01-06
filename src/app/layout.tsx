@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: {
     template: '%s - Anish Patel',
     default:
-      'Anish Patel - Software engineer, tinkerer, and homelab enthusiast.',
+      'Anish Patel',
   },
   description:
     'I’m Anish, a software engineer currently working at Moodys Analytics and based in Seattle, Washington. We develop technologies that help out clients navigate their business challenges.',
