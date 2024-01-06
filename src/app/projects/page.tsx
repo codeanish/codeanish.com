@@ -18,7 +18,7 @@ const projects = [
     name: 'FastNumbers',
     description:
       'A basic arithmetic game developed to help my kids with improving their mental arithmetic. My friend Craig has the record with a score of 68 for 60 seconds of addition',
-    link: { href: 'https:/fastnumbers.codeanish.com', label: 'fastnumbers.codeanish.com' },
+    link: { href: 'https://fastnumbers.codeanish.com', label: 'fastnumbers.codeanish.com' },
     logo: logoArithmetic,
   },
 ]
