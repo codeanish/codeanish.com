@@ -1,0 +1,51 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import codeanishv1 from './codeanish-site-v1.png'
+
+export const article = {
+  author: 'Anish Patel',
+  date: '2024-01-05',
+  title: 'Hello World',
+  description:
+    'Today I\'m launching a new iteration of my website.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+I've lost count of the number of times that I've updated/recreated my website. 
+Let's be honest, every time I do it, it's almost always a complete rewrite.
+
+The first iteration of my site (in 2010) has now been lost to the ether and
+was codeinthemorning.com. Looking back at the web.archive.com, it seems almost
+entirely lost at this point. I can only find one article I wrote about SQL Server
+data types. All styling and formatting has been lost. This is probably for the
+best.
+
+A couple of years ago, I thought it had been a long time since I did any web
+development, so I thought I'd brush up my skills and make myself a basic site. 
+The home of this site is the same as this current site, codeanish.com. I built the
+site using Gatsby. 
+
+<Image src={codeanishv1} alt="" />
+
+## Moving forward
+
+At this point, I'm coding regularly (just check out my Github contribution graph), and
+felt as though a redesign with additional features was necessary. 
+I liked how quick my existing site was, owing to it being a static generated site, and how it fits my aesthetic.
+However, it lacked a bunch of features that I didn't take the time to build, like a 
+blog or a home for a digital garden. Many of these things would have been achievable 
+using Gatsby, but I wanted to give NextJS a go - given it's the new hotness in town
+and Gatsby seems to have died a death.
+
+Now I have the bones of a good design and a blog, so I can happily publish
+posts on things that I find interesting and deem worthy of sharing. I hope you 
+enjoy the posts to come and enjoy the journey with me.
+
+I'm sure this is not the last re-design of this site, but I can probably confidently say
+that this is the last re-design of this site in 2024 at least 😀.
