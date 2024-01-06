@@ -54,6 +54,12 @@ export default function Uses() {
             It has a great screen, works pretty damn fast and is my go to device
             for day-to-day coding.
           </Tool>
+          <Tool title="Custom PC, 5950x CPU, 64GB RAM and a 3090 GPU">
+            Building your own PC is a rite of passage I believe everyone should
+            go through. I love mine, it's built in a Fractal Terra case so it 
+            looks beautiful on my desk. It doesn't have the best thermals, but it
+            does the trick. I've got it set up to dual boot into Windows and Arch Linux.
+          </Tool>
           <Tool title="BENQ PD2700U Monitor x2">
             A 27-inch, 4k monitor with great colours at a good price. I have two
             of them on my desk. Programmer pro tip, use two monitors, don't listen
@@ -100,20 +106,17 @@ export default function Uses() {
           <Tool title="Bear">
             A great notes app, not the most complete out there, but it is beautiful.
           </Tool>
-          <Tool title="Reflect">
-            Using a daily notes system instead of trying to keep things
-            organized by topics has been super powerful for me. And with
-            Reflect, it’s still easy for me to keep all of that stuff
-            discoverable by topic even though all of my writing happens in the
-            daily note.
+          <Tool title="Bitwarden">
+            You don't use the same password on every website do you? Get a password
+            manager. I use Bitwarden, it's open source and has all the features I need. 
+            You can use whichever one you want. 
           </Tool>
-          <Tool title="SavvyCal">
-            Great tool for scheduling meetings while protecting my calendar and
-            making sure I still have lots of time for deep work during the week.
-          </Tool>
-          <Tool title="Focus">
-            Simple tool for blocking distracting websites when I need to just do
-            the work and get some momentum going.
+          <Tool title="Pomo CLI">
+            I'm a big fan of the pomodoro technique for helping me to focus on what I'm
+            doing and to stay on task. I have tried many different solutions from using a
+            pomo timer in the browser to using a timer on my phone. I find that all the 
+            options take me out of focus mode, so I built my own CLI tool to use as a 
+            pomodoro timer. You can get instructions for how to install it <a href='https://github.com/codeanish/pomo-cli'>here</a>.
           </Tool>
         </ToolsSection>
       </div>

@@ -9,7 +9,7 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from '@/components/SocialIcons'
-import portraitImage from '@/images/portrait.jpg'
+import portraitImage from '@/images/avatar.jpg'
 
 function SocialLink({
   className,
@@ -72,30 +72,47 @@ export default function About() {
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I’ve loved making things for as long as I can remember, and wrote
-              my first program when I was 6 years old, just two weeks after my
-              mom brought home the brand new Macintosh LC 550 that I taught
-              myself to type on.
+              I was 7 years old when I got my first computer, a Commodore C64.
+              It quite literally changed my life. From the tape loading to the
+              weird, awesome games, it was my most memorable ever Christmas gift.
+              It was on this computer that I first got a taste of programming by
+              playing about with a bit of BASIC.
             </p>
             <p>
-              The only thing I loved more than computers as a kid was space.
-              When I was 8, I climbed the 40-foot oak tree at the back of our
-              yard while wearing my older sister’s motorcycle helmet, counted
-              down from three, and jumped — hoping the tree was tall enough that
-              with just a bit of momentum I’d be able to get to orbit.
+              I didn't really do much in the way of programming from this point
+              till I got my first PC with a 56k modem years later. It was at this
+              point that I first started making websites - inspired by the fledgling
+              internet. I carefully hand crafted plain HTML websites using notepad
+              and viewing the websites using Internet Explorer. Oh the good old days.
             </p>
             <p>
-              I spent the next few summers indoors working on a rocket design,
-              while I recovered from the multiple surgeries it took to fix my
-              badly broken legs. It took nine iterations, but when I was 15 I
-              sent my dad’s Blackberry into orbit and was able to transmit a
-              photo back down to our family computer from space.
+              Fast forward a bunch of years and I'd stopped writing code entirely
+              while the world kept advancing and improving around me. I came back 
+              to coding in my first job in 2008 learning C#, VBA and SQL. In short
+              order, I'd built desktop apps, web apps, spreadsheet automations and
+              console apps.
             </p>
             <p>
-              Today, I’m the founder of Planetaria, where we’re working on
-              civilian space suits and manned shuttle kits you can assemble at
-              home so that the next generation of kids really <em>can</em> make
-              it to orbit — from the comfort of their own backyards.
+              I worked in the space of Insurance and Banking for many years, learning
+              many different technologies to the point where I now see myself as a
+              language agnostic programmer. I have my favourites, but I work in 
+              any language and technology that the situation calls for. The bulk of
+              my career has been running a technology consulting business where we 
+              would develop custom solutions for our clients to leverage analytical
+              capabilities provided by my company.
+            </p>
+            <p>
+              Now, I work as a platform engineer, creating a multi cloud internal 
+              developer platform at Moodys Analytics. Doing this has taught me a
+              great deal about how to scale developer productivity and achieve 
+              standardisation across a large development organisation.
+            </p>
+            <p>
+              In my spare time, I like to write code to sharpen my skills and 
+              work on my never ending homelab build out. I've accumulated enough
+              tech in my house to run a small/medium business at home with
+              enterprise class networking, CICD pipelines and the obligatory 
+              home automation and hosting services.
             </p>
           </div>
         </div>
