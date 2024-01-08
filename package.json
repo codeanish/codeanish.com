@@ -21,6 +21,7 @@
     "@types/react-dom": "18.2.7",
     "@types/webpack-env": "^1.18.1",
     "autoprefixer": "^10.4.12",
+    "axios": "^1.6.5",
     "cheerio": "^1.0.0-rc.12",
     "clsx": "^1.2.1",
     "fast-glob": "^3.2.11",
