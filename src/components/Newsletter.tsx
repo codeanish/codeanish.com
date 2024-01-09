@@ -1,6 +1,8 @@
 "use client"
 import { useState } from "react"
 import { Button } from "./Button"
+import axios from "axios"
+import { redirect } from "next/navigation"
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     return (
@@ -37,6 +39,14 @@ const Newsletter = () => {
 
     const handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault()
+        axios.post("https://nqf8m0cgee.execute-api.us-west-2.amazonaws.com/CodeanishEmailSignUp", {
+            email: state.email
+        })
+        .then(() => {
+            redirect("/thank-you")
+        }, (error) => { 
+            console.log(error) 
+        })
         console.log(state.email)
     }
 
