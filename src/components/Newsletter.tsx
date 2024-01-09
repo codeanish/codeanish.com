@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { Button } from "./Button"
 import axios from "axios"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     return (
@@ -33,6 +33,8 @@ const Newsletter = () => {
         email: ""
     })
 
+    const { push } = useRouter();
+
     const handleChange = (e: { target: { value: any } }) => {
         setState({ email: e.target.value })
     }
@@ -43,7 +45,7 @@ const Newsletter = () => {
             email: state.email
         })
         .then(() => {
-            redirect("/thank-you")
+            push("/thank-you")
         }, (error) => { 
             console.log(error) 
         })
