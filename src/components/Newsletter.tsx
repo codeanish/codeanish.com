@@ -47,7 +47,6 @@ const Newsletter = () => {
         .then(() => {
             push("/thank-you")
         }, (error) => { 
-            console.log(error) 
         })
         console.log(state.email)
     }
