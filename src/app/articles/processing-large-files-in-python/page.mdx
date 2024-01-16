@@ -1,0 +1,152 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+
+import cpuUsage from './CPUUsage.png'
+import memoryPressure from './MemoryPressure.png'
+import diskUsage from './DiskUsage.png'
+
+export const dynamic = 'force-static'
+
+export const article = {
+    author: 'Anish Patel',
+    date: '2024-01-15',
+    title: 'Processing Large Files in Python',
+    description: 'Processing large files in Python is something we commonly have to do. There are some techniques that can be used to speed up the processing of these files, in this article, we\'ll be examining them.'
+}
+
+export const metadata = {
+    title: article.title,
+    description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+If any of you are followers of Tech Twitter, you'll know that the <a href="https://www.morling.dev/blog/one-billion-row-challenge/">1 billion row
+challenge</a> was something that was doing the rounds a couple of weeks ago in the
+Java community. Since then, it's been an excuse for people to use other languages to
+tackle the problem of quickly and efficiently solving a simple problem of parsing
+a very large file and performing some simple operations on the contents of it.
+
+Processing a file is a straightforward endevour. You open the file, read the contents
+and then do something with it. The problem with this is that it's not very efficient.
+
+## Simple approach (not optimal for large files)
+
+The simplest approach to processing a file is to read it line by line and perform the 
+operations on each line. Below is a simple example of this:
+
+```python
+def simple_get_weather_data(filepath: str) -> Dict[str, List[float]]:
+    results = {}
+    with open(filepath, "r") as file:
+        for line in file:
+            location, measurement = line.split(';')
+            if results.get(location):
+                results[location].append(float(measurement))
+            else:
+                results[location] = [float(measurement)]
+    return results
+```
+
+On my 2021 Macbook Pro, this takes around 0.2 seconds to process a file with 100k rows.
+This file is around 1.5MB in size. If we have a file that is 10M rows and 152MB, this
+takes around 3.5 seconds to process. When we scale to a 1B row file, this is an astonishing
+15GB in size, and takes around 7 minutes to process. This is not ideal.
+
+## Why is this so slow?
+
+It's important when thinking of optimising a solution to understand what
+the bottlenecks are. On MacOS, we can take a look at Activity Monitor to analyse
+the CPU usage, Memory usage and Disk Usage. When we run the above code, we can see
+that the CPU usage is around 100% on one process and the memory usage is growing
+steadily with gigabytes of data being read into memory. This is all while disk usage
+is relatively low.
+
+<Image src={cpuUsage} alt="" />
+<Image src={memoryPressure} alt="" />
+<Image src={diskUsage} alt="" />
+
+We need to address this situation. If we can spread the CPU work onto multiple
+cores, reduce memory pressure and increase the disk usage, we can speed up the
+processing of the file.
+
+## Using multiprocessing
+
+I have a 10 core processor on my MacBook Pro, so I can use multiprocessing to
+spread the work across multiple cores. Let's say we want to split the file in 
+such a way that each core can process a part of the file, and we'll want 10 file
+chunks to process. 
+
+First, we'll need to split the file into 10 chunks. 
+
+The python files API provides us with a few functions to help us achieve
+this. We can use the `seek` function to move the file pointer to a specific
+location in the file. We need to ensure we don't just find an arbitrary location
+in the file, we need to find a line break, so we use the `readline` function to 
+read to the end of the line, then we can use the `tell` function to
+find the current location of the file pointer.
+
+```python
+def get_file_chunks(file_name: str, cpu_cores: int):
+    file_size = os.path.getsize(file_name)
+    chunk_size = file_size // cpu_cores
+    chunks = []
+
+    with open(file_name, "r") as file:
+        chunk_start = 0
+        while chunk_start < file_size:
+            chunk_end = min(file_size, chunk_start + chunk_size)
+            file.seek(chunk_end)
+            file.readline()
+            chunk_end = file.tell()
+            chunks.append((file_name, chunk_start, chunk_end))
+            chunk_start = chunk_end
+    return chunks
+```
+
+This gives us a list of 10 chunks of the file from which we can process. We can
+then use the `multiprocessing` library to process each chunk in parallel.
+
+```python
+def process_file(cpu_count: int, chunks: list):
+    with mp.Pool(cpu_count) as p:
+        # Run chunks in parallel
+        chunk_results = p.starmap(
+            _process_file_chunk,
+            chunks,
+        )
+        # Combine results
+    results = {}
+    for chunk_result in chunk_results:
+        for location, measurements in chunk_result.items():
+            if location not in results:
+                results[location] = measurements
+            else:
+                results[location].extend(measurements)
+    return results
+
+def _process_file_chunk(file_name: str, start: int, end: int):
+    results = {}
+    with open(file_name, "r") as file:
+        file.seek(start)
+        for line in file:
+            start += len(line)
+            if start > end:
+                break
+            location, measurement = line.split(';')
+            if results.get(location):
+                results[location].append(float(measurement))
+            else:
+                results[location] = [float(measurement)]
+    return results
+```
+
+This works incredibly well for medium sized files, as this allows us to utilise
+all of the CPU cores available to us. However, when we scale up to a 1B row file,
+we run into some issues. The first issue is that we run out of memory. This is
+because the results objects we're using contain all the measurements for each location.
+This means that we're storing 1B rows in memory. We should instead try to bring our 
+processing into the file reading loop, so that we can process each line as we read it.
+
+Doing so will dramatically reduce our memory footprint, and ensure that we can run
+the process efficiently across huge files. This will be the focus of the next post.
