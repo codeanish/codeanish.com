@@ -219,13 +219,22 @@ def _process_file_chunk(file_name: str, start: int, end: int) -> dict:
 ```
 
 Now we're finally in a position where we can process a 1B row file in a reasonable
-amount of time. On my 2021 MacBook Pro, this takes around 2 minutes to process.
+amount of time. On my 2021 MacBook Pro, this takes around 2 minutes to process. This
+is all while having a negligible memory footprint and having multiple cores running
+at high CPU usage.
+
+The cores weren't pegged at 100% CPU usage, but they were all running at around 80%
+CPU usage, and there were no bottlenecks in terms of IO performance or memory usage.
+I think that there is still some room for improvement here, but I'm not sure how
+much more we can squeeze out of this. If we can manage to up the CPU usage to 100%,
+we might be able to make this process ever so slightly faster.
 
 We were helped by the fact that we were able to discard the list of measurements
 for each location, as the statistics we had to calculate were the min, max, mean
-and count. If we had to calculate something like the median, we would have to
+(sum/count). If we had to calculate something like the median, we would have to
 store the list of measurements in memory, which would mean we would run out of
 memory.
 
 If you have to do that, look into either using a different programming language
-which stores floats more efficiently.
+which stores floats more efficiently. Let me know if you have any ideas on how
+to improve this further, I'd love to hear them!
