@@ -9,7 +9,7 @@ export const dynamic = 'force-static'
 
 export const article = {
     author: 'Anish Patel',
-    date: '2024-01-15',
+    date: '2024-01-17',
     title: 'Processing Large Files in Python',
     description: 'Processing large files in Python is something we commonly have to do. There are some techniques that can be used to speed up the processing of these files, in this article, we\'ll be examining them.'
 }
@@ -143,10 +143,89 @@ def _process_file_chunk(file_name: str, start: int, end: int):
 
 This works incredibly well for medium sized files, as this allows us to utilise
 all of the CPU cores available to us. However, when we scale up to a 1B row file,
-we run into some issues. The first issue is that we run out of memory. This is
-because the results objects we're using contain all the measurements for each location.
-This means that we're storing 1B rows in memory. We should instead try to bring our 
-processing into the file reading loop, so that we can process each line as we read it.
+we run into some issues. The first issue is that we run out of memory.
 
-Doing so will dramatically reduce our memory footprint, and ensure that we can run
-the process efficiently across huge files. This will be the focus of the next post.
+## A recap on floats in Python
+
+In python, floats are objects. This means that they have a lot of overhead
+associated with them, taking up a lot of memory. This is because the number is stored
+as an 8 byte double, and the overhead of the object is 16 bytes. This means that
+if we have a list of 1B floats, we're storing 24 bytes per float, which is 24GB of
+memory.
+
+This is very different to a language like C. In C, a double is stored as a 8 byte double. 
+This means that a list of 1B doubles is 8GB of memory. This is a lot less than the 24GB
+we're using in Python.
+
+## So what can we do?
+
+In our example, we're storing the measurements for each location in a list. This
+means that we're storing a list of 1B floats in memory. If instead, we could
+calculate the mean, min and max as we go, we no longer need to store the list of
+measurements in memory. This will dramatically reduce the memory footprint of our
+process.
+
+There are around 45k cities in our dataset, so if we adopt the above approach, we'll
+be storing 45,000 (cities) x 4 (min, max, count & sum) x 24 bytes of memory, which
+is 4.3MB. This is a lot less than the 52GB we were using before.    
+
+```python
+def process_file(cpu_count: int, chunks: list):
+    with mp.Pool(cpu_count) as p:
+        # Run chunks in parallel
+        chunk_results = p.starmap(
+            _process_file_chunk,
+            chunks,
+        )
+    # Combine results
+    results = {} # {location: [min, max, sum, count]}
+    for chunk_result in chunk_results:
+        for location, measurements in chunk_result.items():
+            if location not in results:
+                results[location] = measurements
+            else:
+                if measurements[0] < results[location][0]:
+                    results[location][0] = measurements[0]
+                if measurements[1] > results[location][1]:
+                    results[location][1] = measurements[1]
+                results[location][2] += measurements[2]
+                results[location][3] += measurements[3]
+    return results
+
+def _process_file_chunk(file_name: str, start: int, end: int) -> dict:
+    results = {} # {location: [min, max, sum, count]}
+    with open(file_name, "r") as file:
+        file.seek(start)
+        for line in file:
+            start += len(line)
+            if start > end:
+                break
+            location, measurement = line.split(';')
+            measurement = float(measurement)
+            if results.get(location):
+                # If less than min, replace min
+                if measurement < results[location][0]:
+                    results[location][0] = measurement
+                # If more than max, replace max
+                if measurement > results[location][1]:
+                    results[location][1] = measurement
+                # Add to sum
+                results[location][2] += measurement
+                # Add to count
+                results[location][3] += 1
+            else:
+                results[location] = [measurement, measurement, measurement, 1]
+    return results
+```
+
+Now we're finally in a position where we can process a 1B row file in a reasonable
+amount of time. On my 2021 MacBook Pro, this takes around 2 minutes to process.
+
+We were helped by the fact that we were able to discard the list of measurements
+for each location, as the statistics we had to calculate were the min, max, mean
+and count. If we had to calculate something like the median, we would have to
+store the list of measurements in memory, which would mean we would run out of
+memory.
+
+If you have to do that, look into either using a different programming language
+which stores floats more efficiently.
