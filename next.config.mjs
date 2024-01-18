@@ -8,7 +8,8 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true
-  }
+  },
+  trailingSlash: true,
 }
 
 const withMDX = nextMDX({
