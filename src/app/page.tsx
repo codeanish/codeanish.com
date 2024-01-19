@@ -17,6 +17,12 @@ import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import Newsletter from '@/components/Newsletter'
 
+export const metadata = {
+  openGraph: {
+    title: 'CodeAnish',
+    description: 'Software engineer, tinkerer, and homelab enthusiast',
+  }
+};
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
