@@ -19,7 +19,7 @@ import Newsletter from '@/components/Newsletter'
 
 export const metadata = {
   openGraph: {
-    title: 'CodeAnish',
+    title: 'Anish Patel: Software Engineer, Tinkerer, and Homelab Enthusiast',
     description: 'Software engineer, tinkerer, and homelab enthusiast',
   }
 };
