@@ -36,7 +36,7 @@ export function ArticleLayout({
   return (
     <Container className="mt-16 lg:mt-32">
       <div className="xl:relative">
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-2xl space-y-16">
           {previousPathname && (
             <button
               type="button"
@@ -64,9 +64,10 @@ export function ArticleLayout({
               {children}
             </Prose>
           </article>
+          <Newsletter/>
         </div>
+        
       </div>
-      <Newsletter/>
     </Container>
   )
 }
