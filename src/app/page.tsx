@@ -1,6 +1,6 @@
 import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
-
+import Script from 'next/script'
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
@@ -201,6 +201,7 @@ export default async function Home() {
 
   return (
     <>
+      <Script src="https://plausible.io/js/script.js" data-domain="codeanish.com" defer />
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
