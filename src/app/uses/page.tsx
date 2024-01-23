@@ -60,12 +60,11 @@ export default function Uses() {
             looks beautiful on my desk. It doesn't have the best thermals, but it
             does the trick. I've got it set up to dual boot into Windows and Arch Linux.
           </Tool>
-          <Tool title="BENQ PD2700U Monitor x2">
-            A 27-inch, 4k monitor with great colours at a good price. I have two
-            of them on my desk. Programmer pro tip, use two monitors, don't listen
-            to the one monitor zelots, it's a productivity booster. I wish I could
-            splurge on 2x Studio Displays, but I can't justify spending so much money
-            on a monitor that tops out at 60hz. It's 2024 now, Apple, sort it out. 
+          <Tool title="Apple Studio Display">
+            A 27-inch, 5k monitor with great colours at a crazy price. I used to run
+            2x4k monitors, but for the sake of simplicity, I decided to minimise my desk
+            footprint and move to a single display. I love the look, but honestly, 60hz?
+            It's 2024, Apple, sort it out. 
           </Tool>
           <Tool title="Rama Works U80-A Seq 2">
             I waited for 2 years to receive this keyboard and absolutely adore it.
