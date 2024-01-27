@@ -117,6 +117,19 @@ export default function Uses() {
             options take me out of focus mode, so I built my own CLI tool to use as a 
             pomodoro timer. You can get instructions for how to install it <a href='https://github.com/codeanish/pomo-cli'>here</a>.
           </Tool>
+          <Tool title="Arc Browser">
+            I don't know why I hate Google Chrome, but I do. I'm always on the lookout for
+            a browser that isn't Chrome, but I've never managed to settle on one until
+            Arc Browser. It's based on Chromium, so you can have all your Chrome essentials, 
+            but the way it's put together really helps with multi tasking. I'm still getting to
+            know this browser really, but as it stands, I don't see any reason why I would switch
+            back to Google Chrome.
+          </Tool>
+          <Tool title="Raindrop.io">
+            I read a lot on the internet. I've always struggled with bookmarks in Chrome and
+            Read Later in Safari. I came across Raindrop.io as a bookmark manager. It's still
+            very much in Beta for me, but I like it so far.
+          </Tool>
         </ToolsSection>
       </div>
     </SimpleLayout>
