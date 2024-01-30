@@ -1,0 +1,131 @@
+import {ArticleLayout} from '@/components/ArticleLayout'
+
+export const dynamic = 'force-static';
+
+export const article = {
+    author: 'Anish Patel',
+    date: '2024-01-24',
+    title: 'Disaster Recovery Considerations',
+    description: 'When you use the cloud for deploying your applications, do not assume that it\s different to anything else you\'ve deployed in a data center, you still need to think about disaster recovery.',
+}
+
+export const metdata = {
+    title: article.title,
+    description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props}/>
+
+Years ago, I worked at an Investment Bank, boy did they take disaster recovery seriously.
+One could be forgiven for thinking that their business depended on it. We had our applications
+and data deployed in one data center, and a mirror of the applications and data in another, 
+geographically separate data center. Every 6 months, would take it in turns to be the BCP guy
+for the weekend, go down to the second data center and failover our services to the secondary site.
+This kind of business practice may seem archaic these days, but when it comes to running critical
+systems, you need to have a great deal of confidence in being able to continue operating your business
+even when things go wrong - which they eventually always do.
+
+**All businesses running business-critical applications need to pay attention to their BCP (Business Continuity Plan)**
+
+## What is the difference between BCP and Disaster Recover Plans?
+
+A Business Continuity Plan (BCP) is a plan you develop with your business to determine
+how in the event of a disaster, you're going to keep your business-critical operations going.
+Let's imagine we own a coffee shop and our electronic payment system is out of action, this would
+be absolutely dreadful for the coffee shop if they're unable to accept payments for coffee. A BCP
+plan for the coffee shop might include things like - have some petty cash on hand to be
+able to accept payments, directing customers to the nearest ATM to get cash, keeping a paper ledger in
+place so that transactions can be recorded etc. The plan would include detailed instructions
+for the staff to ensure that they're able to keep the functions of the coffee shop working as 
+smoothly as possible.
+
+A Disaster Recovery plan has a slightly different focus to a BCP plan. It's less focussed on
+ensuring that the business operations can continue to function in the event of a catastrophe, but
+rather on building out IT infrastructure to meet some key IT objectives to minimise data loss and
+to return their systems to a working state as soon as possible. These two metrics are known as 
+Recovery Point Objective (RPO) and Recovery Time Objective (RTO).
+
+## RTO and RPO
+
+RPO is measured as the period before a disaster strikes to the last known good state of
+the application. Let's take our coffee shop payment system as an example again. If our payment 
+processing capability stops at some point, there was a point before that when it was working.
+While it's working, transactions are being written to your data store and everything is hunky
+dory. At some point, your transactions start to fail and you wonder WTF just happened. That
+period that elapsed is called your RPO.
+
+Your RTO is the period after which a disaster strikes and you can get your systems back
+online again. Again, using our coffee shop example, when we first notice our system is non-functional,
+how long before we get back online and we can start sending transactions through the system again.
+
+Based on your specific business, you may have different goals for RTO and RPO. In some businesses,
+pretty much any downtime or loss of data is seen as catastrophic and we must design our system to 
+be able to respond quickly to disasters. There is a balancing act involved here as we need to weigh
+up the benefits of near-zero downtime with the higher costs and complexity of delivering such a solution.
+
+The spectrum of options you can choose to architect your solution are:
+
+|DR Strategy|Description|RPO|RTO|
+|---|---|---|---|
+|YOLO|It's not going to break, have some faith. You make the subconscious contract with yourself that it's ok to lose all of your data and if your applications fall over, you'll figure out what to do at the time.|Infinity|Who knows|
+|Nightly backup and restore|You can tolerate a day's worth of data loss, and have practiced bringing up your data and new deployment of your application.|1 day|However long it took you to failover in your testing|
+|Database duplication & deactivated failover app infra|Your database is duplicated in more than one data center as is your app deployment. The failover app deployment is switched off to save on compute costs|Minutes/Hours|However long it took you to failover in your testing|
+|Duplication with frugal failover|You have a live replica of your database, and also a live failover environment. The failover enviornment is a scaled back environment that can't handle your full production load - but it's cheaper|Minutes|Minutes - To scale failover up to production load|
+|Gold-plated duplication|A full-scale duplication of your application and data infrastructure. Each copy is able to independently run your full production load and these are behind a load balancer to even the load between environments in good times|Negligable|Negligable|
+
+## DR support for AWS databases
+
+When you're working on your DR strategy in AWS, you have a few database options you can use. Each
+of them has their own RTO/RPO characteristics and should be used as part of your application architecture
+to ensure that you comply with your business DR strategy.
+
+|Database|DR type|RPO|RTO|
+|---|---|---|---|
+|Homespun database in EC2|YOLO/Nightly backup|Minutes/Infinity|Minutes/Days|
+|RDS for Postgres|Database duplication|Sub second|Minutes|
+|Aurora Postgres|Database duplication|Sub second|~1 Minute|
+|DynamoDB|Full duplication|Zero|Sub second|
+
+The database is a key component of your RPO piece, but depending on how you've architected your solution,
+the application services that make up your application may well be the largest piece of the puzzle when
+it comes to your RTO.
+
+## How to get faster?
+
+We all want faster DR, this boils down to two things:
+
+1. Detect disasters quickly
+2. Automate your failover process
+
+Man, I wish we had this baked in when I was working at an Investment bank. It would have saved me a couple
+of Saturday morning drives to a data center.
+
+Every application is unique, so I can't be too prescriptive here in terms of how to detect failures.
+For a typical app with an API that talks to a database, if your API is unresponsive or starts giving
+erroneous responses, you need to check for that using an automated, periodic process like automated
+health checks on the API. You can set the frequency of these requests to whatever meets your RPO.
+
+When you do detect an issue that you want to use as a trigger to failover with, you need to have
+an automated process that can be initialised by your health check process. The automated process
+should ensure that your data is in the correct state, ready to proceed, and your applications are
+brought back online with access to the newly failed-over data.
+
+The automated failover process should also notify all those who need to know that a failover 
+event has occurred so that they can be on hand should any decisions need to be made or any issues
+from failover arise.
+
+Building the failover process is individual to your company's needs and should be considered
+when architecting your overall solution. 
+
+## Take some comfort
+
+Not all applications need to have a Rolls Royce DR strategy. Sometimes if your company can 
+tolerate it, the YOLO approach may well be the right approach for you. I'd advise against
+the YOLO approach in almost all circumstances, and at least urge you to regularly back up your
+data, but the option is there should you either need it or not consider DR in your solution.
+
+When all else is equal, shooting for one of the more solid DR strategies is what I would tend to 
+advise. A balanced strategy of a duplicate database and a shutdown deployment of your app 
+infrastructure in your failover region strikes a nice blend between being fairly cheap - as 
+compared to doing nothing at all, and giving you the ability to come back online rapidly should
+the worst occur. 
