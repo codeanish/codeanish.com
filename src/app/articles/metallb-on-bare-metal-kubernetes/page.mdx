@@ -1,0 +1,145 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import externalIPShowing from './ExternalIPShowing.png'
+import nodePort from './NodePort.png'
+export const dynamic = 'force-static';
+
+export const article = {
+  author: 'Anish Patel',
+  date: '2025-02-16',
+  title: 'MetalLB Load Balancer on Bare Metal Kubernetes',
+  description:
+    'How to install MetalLB, a LoadBalancer for Bare Metal Kubernetes clusters.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Up until this point, I've always used Kubernetes using a cloud managed Kubernetes cluster from
+AWS (EKS) or Azure (AKS). I like to think of these managed Kubernetes clusters as "Batteries Included" 
+clusters. They have a bunch of quality of life features that Kubernetes doesn't ship with out of the box.
+One of these things is a Load Balancer.
+
+I've recently provisioned a Kubernetes cluster in my homelab using the excellent project
+[Talos](https://talos.dev). This was really quick and easy to set up using the guides on their website, 
+and I used a combination of Terraform and a few manual DHCP steps to get the cluster up and running. 
+Talos is a Linux Distribution custom built and configured for running Kubernetes clusters. All you 
+have to do is boot your VM's or Bare Metal instances with an ISO you get from the Talos Image Factory, 
+add the mac addresses of those nodes to your DHCP server for some static reservations and boom, they're up 
+and running. The final step is just installing the Talos image to generate some configuration for the nodes
+and run apply the configuration to the nodes which triggers an installation process. So far so good.
+
+Now you have a fully working Kubernetes cluster and can interact with it in the same way as you would with 
+kubectl as with any other kubernetes instance. Great. You can create deployments easily enough, either 
+directly with kubectl or by applying some manifest files. The trouble comes with trying to expose your
+services outside of your kubernetes cluster. One of the things which works really well is to create a
+service of type NodePort which exposes the service to `http://{AnyOfTheK8sNodes}:{NodePort}`. 
+
+<Image src={nodePort} alt="" />
+
+While this works just fine, and is kind of the same process I've had with Docker for the past few years before putting 
+those node ports through a reverse proxy (like Nginx Proxy Manager) to be able to access your service 
+using a fully qualified domain name and HTTPS, it feels as though it's missing some key features from 
+our cloud implementations. 
+
+If we try to deploy a service of type LoadBalancer, I would expect to receive an IP address to be able
+to reach my service from the outside world, however without configuring a load balancer for your kubernetes
+cluster, your service deployment cannot assign an IP address to the service and it remains in a state of 
+pending.
+
+This is where MetalLB comes in. MetalLB is a load balancer implementation for Kubernetes clusters that
+performs the function of assigning IP addresses from a pre-defined range of IP addresses to services of
+type LoadBalancer in an automated fashion. It couldn't be simpler to deploy MetalLB and configure it to
+hand out IP addresses to services that you deploy.
+
+## Step 1 - Deploy MetalLB on your Kubernetes cluster
+
+You need to go ahead and find the latest MetalLB manifest file to deploy to your Kubernetes cluster.
+You can go ahead and find the manifest file to deploy in releases on the MetalLB [github](https://github.com/metallb/metallb/releases).
+In my case with version 0.14.9, you can just run the following command:
+
+```
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml
+```
+
+You can of course inspect the file and take a look at what it does. This creates a namespace for MetalLB, 
+defines some custom resource definitions for MetalLB, sets up a service account and role for MetalLB to
+access the Kubernetes API and finally deploys the MetalLB controller and speaker pods.
+
+## Step 2 - Configure MetalLB to use an IP range
+
+Now MetalLB has been deployed on your Kubernetes cluster, you need to configure it to allocate IP addresses
+that you are happy to allow MetalLB to allocate. These IP addresses shouldn't have anything else on them, and it's
+probably a good idea to make sure your DHCP server can't give out IP addresses in this range. This configuration can 
+be done by creating a manifest for the IPAddressPool and applying it. Here's an example from my homelab:
+
+```yaml
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: test-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 10.0.20.170-10.0.20.190
+```
+
+## Step 3 - Create a Layer2 Advertisment for your Kubernetes cluster:
+
+MetalLB needs to advertise its load balancer services to your Kubernetes Cluster so that it can allocate IP's from 
+it's address pool and have them resolve to services. This can be done by applying the following manifest.
+
+```yaml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: metallb-advertise
+  namespace: metallb-system
+```
+
+## Step 4 - Deploy a service of type LoadBalancer
+
+Now you have MetalLB deployed and configured, you can go ahead and deploy a service of type LoadBalancer. Here's an example
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: webserver
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-balanced-nginx
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: webserver
+```
+
+Now we can see the beautiful ExternalIP address for this service when running `kubectl get svc` and can open a web browser to
+the external IP address and resolve to one of the nodes running the service.
+
+<Image src={externalIPShowing} alt="" />
