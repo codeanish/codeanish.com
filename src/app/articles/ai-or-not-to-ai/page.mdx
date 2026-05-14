@@ -1,0 +1,42 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+
+import cpuUsage from './CPUUsage.png'
+import memoryPressure from './MemoryPressure.png'
+import diskUsage from './DiskUsage.png'
+
+export const dynamic = 'force-static'
+
+export const article = {
+    author: 'Anish Patel',
+    date: '2026-05-13',
+    title: 'AI or not to AI? That is the question',
+    description: 'How much should we be using or relying on AI for our coding tasks'
+}
+
+export const metadata = {
+    title: article.title,
+    description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+For as long as I've been working in tech, must be over 15 years at this point, there have always been snake oil salesmen pushing the idea of building applications without writing code. These so-called no-code tools were marketed as the death of developers, until of course, they weren't. Software development hiring continued at a furious pace. Every tool arrived with the same promise: follow our workflow and you don't need to hire a developer. Whether it was WordPress lowering the barrier to blogging, or Squarespace promising beautiful websites with just a few mouse clicks, or Zapier for integrating all the apps you use together, they all got you 80% of the way to what you actually wanted. If that was good enough, great.
+
+I think no-code is an abject failure, but not for the reasons you might expect. It's not that it did't work well; quite the opposite. It did exactly what many people needed and significantly lowered the barrier to producing and sharing something of value. The failure was one of imagination. No-code never conceived of a world where code would become cheaper than no-code. LLM's and their agentic wrappers produce code to do (almost) exactly what you tell them to do quicker than you can make a cup of tea. No more clicking a mouse, and making selections from a drop-down. Just ask for what you want and AI will dutifully give it to you.
+
+When LLMs first came for our lunch a couple of years ago, I wasn't particularly worried. Sure, they could produce basic HTML or Python easily enough, but they lacked the intelligence and context to understand complex codebases. I tried using ChatGPT for development tasks, but there was way too much copy pasta, and it delivered just enough confidently wrong answers that I eventually gave up. If you wanted to be good at software engineering, there were no shortcuts. You spent your time learning your trade and with enough time and effort, and googling, you became good at it.
+
+Fast forward two years and the landscape looks completely different. Models have become significantly more capable, context windows have grown dramatically, and agentic tooling can now produce mostly correct work at remarkable speed. I've gone from skeptic to fully bought-in on AI-assisted software engineering. That said — mostly correct is not an acceptable bar when production systems have people's livelihoods and money on the line.
+
+Having Claude Code and a terminal at your fingertips feels like having a team of junior developers standing by, each waiting for you to tell them exactly what to do. And they're fast — before you've finished the thought, they've already raised a PR. We're truly living in the era of the 10x developer, except the 10x developer is no longer the person with the most knowledge of esoteric details of garbage collection, they're now someone who knows just how to tickle the models just right to make them sing.
+
+But the "10x developer" is a curious thing. What is x, exactly? If x is an average developer, that would suggest that a below-par developer (say a 0.5x developer) becomes a 5x developer with AI agents behind them. I'm not sure that hypothesis tracks with what I've seen in the real world.
+
+A better way of thinking about this is that AI agents don't multiply your output linearly, they exponentiate it. Think x^10, not 10x. The catch is that exponentiation works in both directions. A senior developer with good judgment gets a huge boost. A poor developer gets extraordinary speed — but with dizzying variability in correctness and quality.
+
+Where you could once read a piece of code and know who wrote it just by how it smelled, that signal is gone. A less experienced developer can now largely outsource their coding to AI, but they cannot outsource their understanding of what actually needs to be done. This is probably the biggest reason junior developers are struggling to find work right now. Senior developers are bending these models to their will and getting huge productivity boosts, while some junior developers are producing questionable output really damn quickly.
+
+All this to say, I'm not sure that having the 'go faster and don't make me think about it' button is such a good thing for everyone. I still think that learning the fundamentals of software engineering and software architecture in an ever changing landscape are as important as ever. I would argue those fundamentals are even more important now than ever now that your memorization of syntax and typing speed are no longer a governing factor in how fast you can produce code. Use AI, get faster, don't assume it'll make you better though.
+
+No GPUs were sacrificed in the production of this article
